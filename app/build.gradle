@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-
+apply from: 'tinkerpatch.gradle'
+apply plugin: 'walle'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
@@ -49,5 +50,17 @@ dependencies {
     //若使用annotation需要单独引用,对于tinker的其他库都无需再引用
     provided("com.tinkerpatch.tinker:tinker-android-anno:${TINKER_VERSION}")
     compile("com.tinkerpatch.sdk:tinkerpatch-android-sdk:${TINKERPATCH_VERSION}")
+    //多渠道打包
+    compile 'com.meituan.android.walle:library:1.1.3'
 }
-apply from: 'tinkerpatch.gradle'
+
+walle {
+    // 指定渠道包的输出路径
+    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
+    // 定制渠道包的APK的文件名称
+    //apkFileNameFormat = '${appName}-${packageName}-${channel}-${buildType}-v${versionName}-${versionCode}-${buildTime}.apk';
+    apkFileNameFormat = '${appName}-${channel}-${buildType}-v${versionName}-${buildTime}.apk';
+    // 渠道配置文件
+    channelFile = rootProject.file("channel")
+}
+
