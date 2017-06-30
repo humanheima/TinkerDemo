@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = (TextView) findViewById(R.id.text_view);
-        textView.setText("Hello tinker!");
-        Toast.makeText(this, "这是一个补丁包", Toast.LENGTH_LONG).show();
+        textView.setText("Hello Friday!");
+        Toast.makeText(this, "按条件下发下发补丁包", Toast.LENGTH_LONG).show();
     }
 }
